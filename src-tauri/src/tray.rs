@@ -49,13 +49,6 @@ pub fn create_tray(app: &AppHandle) -> tauri::Result<()> {
                     app.get_webview_window("main").unwrap().hide().unwrap();
                 }
                 "quit" => {
-                    let autostart_manager = app.autolaunch();
-                    let _ = autostart_manager.is_enabled().and_then(|enabled| {
-                        if enabled {
-                            autostart_manager.disable()?;
-                        }
-                        Ok(())
-                    });
                     app.exit(0);
                 }
                 _ => {
