@@ -4461,7 +4461,6 @@ name = "waycast"
 version = "0.1.0"
 dependencies = [
  "anyhow",
- "open",
  "serde",
  "serde_json",
  "tauri",
