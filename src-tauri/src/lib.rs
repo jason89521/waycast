@@ -1,19 +1,21 @@
 use tauri::Manager;
+use tauri_plugin_autostart::MacosLauncher;
 
 mod global_shortcut;
 mod quicklink;
 mod tray;
 mod window;
 
-// Learn more about Tauri commands at https://tauri.app/v1/guides/features/command
-#[tauri::command]
-fn greet(name: &str) -> String {
-    format!("Hello, {}! You've been greeted from Rust!", name)
-}
-
 #[cfg_attr(mobile, tauri::mobile_entry_point)]
 pub fn run() {
     tauri::Builder::default()
+        .plugin(tauri_plugin_shell::init())
+        .plugin(tauri_plugin_store::Builder::new().build())
+        .plugin(tauri_plugin_autostart::init(
+            MacosLauncher::LaunchAgent,
+            None,
+        ))
+        .plugin(tauri_plugin_dialog::init())
         .setup(|app| {
             #[cfg(all(desktop))]
             {
@@ -28,9 +30,7 @@ pub fn run() {
             }
             Ok(())
         })
-        .plugin(tauri_plugin_shell::init())
-        .plugin(tauri_plugin_store::Builder::new().build())
-        .invoke_handler(tauri::generate_handler![greet, quicklink::open_link])
+        .invoke_handler(tauri::generate_handler![quicklink::open_link,])
         .on_window_event(window::handle_window_event)
         .run(tauri::generate_context!())
         .expect("error while running tauri application");

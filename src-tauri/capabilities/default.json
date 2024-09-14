@@ -4,9 +4,27 @@
   "description": "Capability for the main window",
   "windows": ["main"],
   "permissions": [
-    "core:app:default",
+    "core:default",
     "shell:allow-open",
+    {
+      "identifier": "shell:allow-execute",
+      "allow": [
+        {
+          "name": "exec-sh",
+          "cmd": "sh",
+          "args": [
+            "-c",
+            {
+              "validator": "\\S+"
+            }
+          ],
+          "sidecar": false
+        }
+      ]
+    },
     "store:default",
-    "core:window:allow-set-focus"
+    "core:window:allow-set-focus",
+    "autostart:default",
+    "dialog:default"
   ]
 }
