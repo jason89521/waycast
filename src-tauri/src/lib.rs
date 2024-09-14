@@ -2,7 +2,6 @@ use tauri::Manager;
 use tauri_plugin_autostart::MacosLauncher;
 
 mod global_shortcut;
-mod quicklink;
 mod tray;
 mod window;
 
@@ -30,7 +29,7 @@ pub fn run() {
             }
             Ok(())
         })
-        .invoke_handler(tauri::generate_handler![quicklink::open_link,])
+        .invoke_handler(tauri::generate_handler![])
         .on_window_event(window::handle_window_event)
         .run(tauri::generate_context!())
         .expect("error while running tauri application");
