@@ -29,7 +29,7 @@
     "tailwindcss-animate": "^1.0.7"
   },
   "devDependencies": {
-    "@tauri-apps/cli": ">=2.0.0-rc.0",
+    "@tauri-apps/cli": ">=2.0.0-rc.16",
     "@types/node": "^22.5.5",
     "@types/react": "^18.2.15",
     "@types/react-dom": "^18.2.7",
